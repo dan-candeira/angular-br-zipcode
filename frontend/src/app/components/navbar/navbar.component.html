@@ -1,0 +1,48 @@
+<nav class="p-4 bg-light">
+  <div class="container">
+    <form
+      #cepForm="ngForm"
+      (ngSubmit)="cepForm.form.valid && getCeps()"
+      class="row justify-content-center"
+      novalidate
+    >
+      <div class="col-sm-12 col-md-6">
+        <label for="cep-input" class="form-label fw-bold text-uppercase">
+          Cep
+        </label>
+        <input
+          id="cep-input"
+          class="form-control"
+          name="cep"
+          type="text"
+          [(ngModel)]="cepInput"
+          #cep="ngModel"
+          required
+          appValidateCEPs
+          aria-describedby="cepHelp"
+        />
+        <div id="cepHelp" class="form-text">
+            Use a separação ponto e virgula ";" para adicionar múltiplos CEPs, ex: 00000000;11111111
+        </div>
+        <span
+          class="invalid-feedback fw-bold"
+          [style.display]="(
+                       (cep.touched || cepForm.submitted) && 
+                       cep.errors?.['required']
+                        ) ? 'block': 'none'"
+        >
+          Por favor, informe um ou mais CEPs.
+        </span>
+        <span
+          class="invalid-feedback fw-bold"
+          [style.display]="(
+                        (cep.touched || cepForm.submitted) && 
+                        cep.errors?.['invalidCeps']
+                        ) ? 'block': 'none'"
+        >
+          CEPs inválidos, os CEPs devem ter o formato "00000000".
+        </span>
+      </div>
+    </form>
+  </div>
+</nav>
