@@ -16,8 +16,6 @@ export class NavbarComponent {
     const ceps = this.cepInput
       .split(';')
       .map((c: string) => c.replace(/\s/g, ''));
-      console.log('heeey', ceps)
-
     this.cepService.findLocations$.next(ceps);
   }
 

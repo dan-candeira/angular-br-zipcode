@@ -1,0 +1,60 @@
+<section class="container mt-4">
+  <div class="grid" *ngIf="isLoading$ | async">
+    <div class="card box" *ngFor="let i of [1, 2, 3, 4]"></div>
+  </div>
+
+  <div *ngIf="displayStartMessage$ | async" class="row justify-content-center">
+    <p class="col-md-6 fs-4 text-secondary">
+      Preencha um CEP para encontrar informações sobre o local que deseja.
+    </p>
+  </div>
+
+  <ng-container *ngIf="locations$ | async as locations">
+    <ul [hidden]="isLoading$ | async" role="list" class="grid">
+      <li class="card" *ngFor="let location of locations">
+        <div class="card-body">
+          <h2 class="card-title">{{ location.logradouro }}</h2>
+          <dl>
+            <div class="d-flex">
+              <dt>CEP<span aria-hidden="true">:</span> &nbsp;</dt>
+              <dd>
+                {{ location.cep }}
+              </dd>
+            </div>
+            <div class="d-flex">
+              <dt>Localidade<span aria-hidden="true">:</span> &nbsp;</dt>
+              <dd>
+                {{ location.localidade }}
+              </dd>
+            </div>
+            <div class="d-flex" *ngIf="location.complemento">
+              <dt>Complemento<span aria-hidden="true">:</span> &nbsp;</dt>
+              <dd>
+                {{ location.complemento }}
+              </dd>
+            </div>
+            <div class="d-flex">
+              <dt>UF<span aria-hidden="true">:</span> &nbsp;</dt>
+              <dd>
+                {{ location.uf }}
+              </dd>
+            </div>
+            <div class="d-flex">
+              <dt>DDD<span aria-hidden="true">:</span> &nbsp;</dt>
+              <dd>
+                {{ location.ddd }}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </li>
+    </ul>
+
+    <div *ngIf="locations.length === 0" class="row justify-content-center">
+      <p class="col-md-6 fs-4 text-secondary">
+        Nenhum local com o(s) CEP(s) foi encontrado, por favor confira o(s) CEP(s)
+        preenchido(s) e tente novamente.
+      </p>
+    </div>
+  </ng-container>
+</section>

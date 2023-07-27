@@ -7,12 +7,12 @@
       novalidate
     >
       <div class="col-sm-12 col-md-6">
-        <label for="cep-input" class="form-label fw-bold text-uppercase">
-          Cep
+        <label for="cep-input" class="form-label fw-bold">
+          Buscar informações do local por <span class="text-uppercase">Cep</span>
         </label>
         <input
           id="cep-input"
-          class="form-control"
+          class="form-control border-dark border-3"
           name="cep"
           type="text"
           [(ngModel)]="cepInput"
@@ -21,7 +21,7 @@
           appValidateCEPs
           aria-describedby="cepHelp"
         />
-        <div id="cepHelp" class="form-text">
+        <div id="cepHelp" class="form-text text-body">
             Use a separação ponto e virgula ";" para adicionar múltiplos CEPs, ex: 00000000;11111111
         </div>
         <span
