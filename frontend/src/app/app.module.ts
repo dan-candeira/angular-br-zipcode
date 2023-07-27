@@ -8,13 +8,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ValidateCEPsDirective } from './directives/validate-ceps.directive';
 import { HomeComponent } from './views/home/home.component';
+import { ToastrBodyDirective, ToastrComponent, ToastrTitleDirective } from './components/toastr/toastr.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ValidateCEPsDirective,
-    HomeComponent
+    HomeComponent,
+    ToastrComponent,
+    ToastrBodyDirective,
+    ToastrTitleDirective
   ],
   imports: [
     BrowserModule,

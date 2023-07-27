@@ -8,14 +8,17 @@ import { CepService } from 'src/app/services/cep.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   locations$: Observable<Cep[]> = this.cepService.getLocations$.pipe(
     tap(() => {
       this.requestWasMade$.next(true);
     })
   );
+
   isLoading$ = this.cepService.loading$;
+
   private requestWasMade$ = new BehaviorSubject<boolean>(false);
+
   displayStartMessage$ = combineLatest([
     this.requestWasMade$.asObservable(),
     this.isLoading$.asObservable(),
@@ -29,6 +32,4 @@ export class HomeComponent implements OnInit {
   );
 
   constructor(private cepService: CepService) {}
-
-  ngOnInit(): void {}
 }

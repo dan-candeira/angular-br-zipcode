@@ -2,3 +2,19 @@
 <main tabindex="-1" id="main">
     <router-outlet></router-outlet>
 </main>
+
+<ng-container *ngIf="toastr$ | async as toastr">
+    <app-toastr [hidden]="!toastr.display" class="bg-danger text-white">
+        <p appToastrTitle class="fs-5">
+            {{ toastr.title }}
+        </p>
+        <p appToastrBody>
+            {{ toastr.body }}
+        </p>
+    </app-toastr>
+</ng-container>
+
+<!-- acessibilidade -->
+<div role="alert" aria-live="polite" hidden>
+    {{ (loading$ | async ) ? 'Carregando' : 'Carregamento completo' }}
+</div>
