@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import {
+  BehaviorSubject,
   Observable,
   Subject,
-  catchError,
   combineLatest,
+  delay,
   map,
-  of,
   switchMap,
-  tap,
+  tap
 } from 'rxjs';
 import { Cep } from '../models/cep';
 
@@ -17,18 +17,23 @@ import { Cep } from '../models/cep';
 })
 export class CepService {
   public findLocations$ = new Subject<Array<string>>();
+
   public getLocations$: Observable<Array<Cep>> = this.findLocations$.pipe(
-    switchMap((ceps) =>
+    tap(() => this.loading$.next(true)),
+    switchMap((ceps: string[]) =>
       combineLatest(
-        ceps.map((cep) =>
+        ceps.map((cep: string) =>
           this.httpClient.get<Cep>(`https://viacep.com.br/ws/${cep}/json/`)
         )
       ).pipe(
-        map((resonse): Array<Cep> => {
-          const filtered = resonse
+        delay(500),
+        map((response) => {
+          this.loading$.next(false);
+          const filtered = response
             .map((r) => {
               if ((r as any)['erro']) {
                 // toastr to display erros
+                alert('error');
                 return null;
               }
               return r;
@@ -36,13 +41,12 @@ export class CepService {
             .filter((r) => r !== null);
 
           return filtered as Array<Cep>;
-        }),
-        catchError((error) => {
-          return of([]);
         })
       )
     )
   );
+
+  loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {}
 }
