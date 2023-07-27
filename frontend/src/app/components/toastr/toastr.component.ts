@@ -32,7 +32,7 @@ export class ToastrBodyDirective {}
         padding-block: 0.5rem;
         padding-inline: 1rem;
         right: 0;
-        bottom: 12rem;
+        bottom: 7rem;
       }
 
       .toastr .toastr-title {
