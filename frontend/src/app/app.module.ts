@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ValidateCEPsDirective } from './directives/validate-ceps.directive';
+import { HomeComponent } from './views/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ValidateCEPsDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
