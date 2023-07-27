@@ -5,10 +5,14 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ValidateCEPsDirective } from './directives/validate-ceps.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
+    ValidateCEPsDirective,
   ],
   imports: [
     BrowserModule,
@@ -18,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule
   ],
   providers: [
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [AppComponent]
 })
